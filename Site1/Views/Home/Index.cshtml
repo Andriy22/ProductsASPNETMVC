@@ -3,6 +3,21 @@
     ViewBag.Title = "Home Page";
 }
 
+<script type="text/javascript">
+    function OnBegin() {
+        alert("Происходит отправка запроса");
+    }
+    function OnSuccess(data) {
+        alert("Запрос был успешно выполнен. Получены следующие данные: \n" + data);
+    }
+    function OnFailure(request, error) {
+        $("#results").html("Книги указанного автора не содержатся в базе данных.");
+    }
+    function OnComplete(request, status) {
+        alert("Статус запроса : " + status);
+    }
+
+</script>
 <div class="col s6 offset-s3" style="text-align:center"><h2>PRODUCT TABLE</h2></div>
 
 <table>
@@ -16,18 +31,18 @@
 
     <tbody>
 
-        @{ 
+        @{
             int counter = 0;
             foreach (DAL.Product p in Model)
             {
                 counter++;
-            <tr>
-                <td>@counter</td>
-                <td>@Html.ActionLink(p.Name,"GoLink","Home",new {id=p.Name },null)</td>
-                <td><p>@p.Desk</p></td>
-            </tr>
-                }
-          }
+        <tr>
+            <td>@counter</td>
+            <td>@Html.ActionLink(p.Name, "GoLink", "Home", new { id = p.Name }, null)</td>
+            <td>@Ajax.ActionLink(p.Name, "GetJson", new { id = p.Name }, new AjaxOptions { HttpMethod="POST", OnSuccess= "OnSuccess" })</td> 
+        </tr>
+            }
+        }
 
 
     </tbody>

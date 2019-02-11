@@ -13,5 +13,7 @@ namespace DAL
         //[ForeignKey("Product")]
         public int ID_Product { get; set; }
         public string Descriptions { get; set; }
+        public decimal Price { get; set; }
+        public string Test  { get; set; }
     }
 }

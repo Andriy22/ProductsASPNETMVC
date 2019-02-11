@@ -11,8 +11,6 @@ namespace Site1.Controllers
         DAL.DBase ctx = new DAL.DBase();
         public ActionResult Index()
         {
-
-          
             return View(ctx.Products);
         }
 
@@ -32,7 +30,19 @@ namespace Site1.Controllers
 
         public ActionResult GoLink(string id)
         {
-            return Redirect(ctx.Products.FirstOrDefault(x => x.Name == id).URL);
+            if (String.IsNullOrEmpty(ctx.Products.FirstOrDefault(x => x.Name == id).URL))
+                return HttpNotFound("URL NOT FOUND");
+
+            else
+                return Redirect(ctx.Products.FirstOrDefault(x => x.Name == id).URL);
+        }
+        [HttpPost]
+        public  ActionResult GetJson(string id)
+        {
+            if (ctx.Descriptions.FirstOrDefault(x => x.ID_Product == ctx.Products.FirstOrDefault(y => y.Name == id).ID) != null)
+                return Json(ctx.Descriptions.FirstOrDefault(x => x.ID_Product == ctx.Products.FirstOrDefault(y => y.Name == id).ID), JsonRequestBehavior.AllowGet);
+            else
+                return Json("Descriptions not found", JsonRequestBehavior.AllowGet);
         }
 
     }
