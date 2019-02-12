@@ -16,6 +16,22 @@
     function OnComplete(request, status) {
         alert("Статус запроса : " + status);
     }
+    function Click(val) {
+        $.ajax({
+            url: `http://localhost:50437/Home/GetJson/${val}`,
+            type: "GET",
+            success: function (data) {
+                console.log(data);
+                $('#result').html(`<p>Description: ${data.Descriptions}</p><br><p>Price: ${data.Price}</p><br><p>Test: ${data.Test}</p><br><button class="btn col 12" onclick="Click2()">Clear</button>`)
+            },
+            error: function () {
+                alert("123");
+            }
+        });
+    }
+    function Click2() {
+        $('#result').html(`<br>`);
+    }
 
 </script>
 <div class="col s6 offset-s3" style="text-align:center"><h2>PRODUCT TABLE</h2></div>
@@ -36,14 +52,20 @@
             foreach (DAL.Product p in Model)
             {
                 counter++;
-        <tr>
-            <td>@counter</td>
-            <td>@Html.ActionLink(p.Name, "GoLink", "Home", new { id = p.Name }, null)</td>
-            <td>@Ajax.ActionLink(p.Name, "GetJson", new { id = p.Name }, new AjaxOptions { HttpMethod="POST", OnSuccess= "OnSuccess" })</td> 
-        </tr>
+                <tr>
+                    <td>@counter</td>
+                    <td>@Html.ActionLink(p.Name, "GoLink", "Home", new { id = p.Name }, null)</td>
+                    <td><button id="desc" class="btn" onclick="Click('@p.Name')">Descriptions</button></td>
+                </tr>
             }
         }
 
 
     </tbody>
+
+
 </table>
+<div id="result">
+
+</div>
+

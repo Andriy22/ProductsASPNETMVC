@@ -36,7 +36,7 @@ namespace Site1.Controllers
             else
                 return Redirect(ctx.Products.FirstOrDefault(x => x.Name == id).URL);
         }
-        [HttpPost]
+   
         public  ActionResult GetJson(string id)
         {
             if (ctx.Descriptions.FirstOrDefault(x => x.ID_Product == ctx.Products.FirstOrDefault(y => y.Name == id).ID) != null)
