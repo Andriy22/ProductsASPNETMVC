@@ -42,7 +42,7 @@ namespace Site1.Controllers
             if (ctx.Descriptions.FirstOrDefault(x => x.ID_Product == ctx.Products.FirstOrDefault(y => y.Name == id).ID) != null)
                 return Json(ctx.Descriptions.FirstOrDefault(x => x.ID_Product == ctx.Products.FirstOrDefault(y => y.Name == id).ID), JsonRequestBehavior.AllowGet);
             else
-                return Json("Descriptions not found", JsonRequestBehavior.AllowGet);
+                return Json(new {Descriptions ="Not found" }, JsonRequestBehavior.AllowGet);
         }
 
     }

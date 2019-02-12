@@ -22,7 +22,7 @@
             type: "GET",
             success: function (data) {
                 console.log(data);
-                $('#result').html(`<p>Description: ${data.Descriptions}</p><br><p>Price: ${data.Price}</p><br><p>Test: ${data.Test}</p><br><button class="btn col 12" onclick="Click2()">Clear</button>`)
+                $('#result').html(`<p>Description: ${data.Descriptions}</p><br><p>Price: ${data.Price}</p><br><p>Test: ${data.Test}</p><br><button class="btn-floating pulse" onclick="Click2()">Clear</button>`)
             },
             error: function () {
                 alert("123");
@@ -36,7 +36,7 @@
 </script>
 <div class="col s6 offset-s3" style="text-align:center"><h2>PRODUCT TABLE</h2></div>
 
-<table>
+<table class="centered">
     <thead>
         <tr>
             <th>#</th>
@@ -55,7 +55,7 @@
                 <tr>
                     <td>@counter</td>
                     <td>@Html.ActionLink(p.Name, "GoLink", "Home", new { id = p.Name }, null)</td>
-                    <td><button id="desc" class="btn" onclick="Click('@p.Name')">Descriptions</button></td>
+                    <td><button id="desc" class="btn red pulse" onclick="Click('@p.Name')">Descriptions</button></td>
                 </tr>
             }
         }
